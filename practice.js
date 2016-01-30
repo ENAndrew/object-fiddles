@@ -5,7 +5,8 @@
 //and another key of age with the value being your age. Then alert your name using dot notation.
 
 var me = {
-    name: 'Erica'
+    name: 'Erica',
+    age: 35
 };
 
 alert(me.name);
@@ -42,7 +43,7 @@ favoriteThings.brand = 'Mitsubishi';
 //change the book key in your favoriteThings object to be '50 Shades of Gray'.
 
 favoriteThings.food = 'Lettuce';
-favoriteThings.book = 'I won\'t do that';
+favoriteThings.book = '50 Shades of Gray';
 
 
 
@@ -249,11 +250,11 @@ object. One called 'alertHello' which alerts 'hello' and another method called l
  which logs 'hello' to the console. */
 
 methodCollection.alertHello = function() {
-    alert('Hello');
+    alert('hello');
 };
 
 methodCollection.logHello = function() {
-    console.log('Hello');
+    console.log('hello');
 };
 
 //Now call your alertHello and logHello methods.
@@ -272,13 +273,37 @@ methodCollection.logHello();
 
   //Code Here
 
-function MakePerson(name, birthday, ssn) {
-    this.name = name;
-    this.birthday = birthday;
-    this.ssn = ssn;
-}
+var MakePerson = function(name, birthday, ssn) {  //Called the 'maker pattern' for objects
+    return {
+        name: name,
+        birthday: birthday,
+        ssn: ssn
+    };
+};
 
-var erica = new MakePerson('Erica', 'Jan 13, 1981', 'ssn');
+var erica = MakePerson('Erica', 'Jan 13, 1981', '123-234-4444');
+//Unless we set a new variable equal to the function invocation, the return from the function would
+// be returned, but immediately garbage collected and removed from memory
+
+// Class example allowing user to pass in a function to a method on the object:
+
+//var MakePerson = function(name, birthday, ssn, greeting) {  //Called the 'maker pattern' for objects
+//    return {
+//        name: name,
+//        birthday: birthday,
+//        ssn: ssn,
+//        greeting: greeting
+//    };
+//};
+//
+//var myGreeting = function() {console.log('Ni Hao!');};
+//
+//var erica = MakePerson('Erica', 'Jan 13, 1981', '123-234-4444', myGreeting);
+//
+//also can do -- var erica = MakePerson('Erica', 'Jan 13, 1981', '123-234-4444', function() {
+//                                          console.log('Hello!');});
+//
+//erica.greeting();
 
 
 //NEXT PROBLEM
@@ -289,12 +314,16 @@ var erica = new MakePerson('Erica', 'Jan 13, 1981', 'ssn');
 // object and returns that object so that whenever you invoke MakeCard, you get a brand new credit card.
 
 function MakeCard(userName, cardNumber, expiration) {
-    this.userName = userName;
-    this.cardNumber = cardNumber;
-    this.expiration = expiration;
-}
+    return {
+        userName: userName,
+        cardNumber: cardNumber,
+        expiration: expiration
+    };
+};
   
-var card1 = new MakeCard('eAndrew', '222-333-444', '12/20/18');
+var card1 = MakeCard('eAndrew', '222-333-444', '12/20/18');
+
+
   
 //NEXT PROBLEM
 
@@ -305,13 +334,15 @@ var card1 = new MakeCard('eAndrew', '222-333-444', '12/20/18');
    Have bindCard merge the two parameters together into a new object which contains all the properties from the person as well as the creditcard.
 */
 
-function bindCard(person, card) {
+function bindCard(user, card) {
+    var boundObj = {}; 
+    for(var key in user) {
+        boundObj[key] = user[key];
+    };
     for(var key in card) {
-        if(card.hasOwnProperty(key)) {
-            person[key] = card[key];
-        }
+        boundObj[key] = card[key];
     }
-    return person;
+    return boundObj;
 };
 
 var userCard = bindCard(erica, card1);

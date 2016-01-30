@@ -285,6 +285,8 @@ var erica = MakePerson('Erica', 'Jan 13, 1981', '123-234-4444');
 //Unless we set a new variable equal to the function invocation, the return from the function would
 // be returned, but immediately garbage collected and removed from memory
 
+//-------------------------------------------------------------------------------------
+
 // Class example allowing user to pass in a function to a method on the object:
 
 //var MakePerson = function(name, birthday, ssn, greeting) {  //Called the 'maker pattern' for objects
@@ -304,6 +306,8 @@ var erica = MakePerson('Erica', 'Jan 13, 1981', '123-234-4444');
 //                                          console.log('Hello!');});
 //
 //erica.greeting();
+
+//-----------------------------------------------------------------------------------------
 
 
 //NEXT PROBLEM
